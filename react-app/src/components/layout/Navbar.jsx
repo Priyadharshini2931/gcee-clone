@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { FaBars, FaTimes, FaAngleDown } from 'react-icons/fa';
 import ThemeToggle from '../common/ThemeToggle';
 import { motion, AnimatePresence } from 'framer-motion';
-
+import logo from '../../assets/images/logo.png';
 const NAV_LINKS = [
   { name: 'Home', path: '/' },
   {
@@ -61,12 +61,22 @@ const Navbar = () => {
           
           {/* Logo */}
           <Link to="/" className="flex-shrink-0 flex items-center gap-3 group">
-            <div className={`w-12 h-12 rounded-xl bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-secondary)] flex items-center justify-center shadow-lg transition-all group-hover:scale-105`}>
-              <span className="text-white font-extrabold text-2xl tracking-tighter">GC</span>
-            </div>
-            <span className="font-extrabold text-2xl tracking-tight text-[var(--color-text-main)] transition-colors">
-              ERODE
-            </span>
+            <motion.div 
+              initial={{ rotate: -10, scale: 0.8, opacity: 0 }}
+              animate={{ rotate: 0, scale: 1, opacity: 1 }}
+              transition={{ type: "spring", stiffness: 200, damping: 10 }}
+              className="w-12 h-12 md:w-14 md:h-14 flex items-center justify-center transition-all group-hover:scale-105 group-hover:rotate-3 drop-shadow-[0_0_8px_rgba(255,255,255,0.2)]"
+            >
+              <img src={logo} alt="GCEE Logo" className="w-full h-full object-contain filter drop-shadow-md" />
+            </motion.div>
+            <motion.span 
+              initial={{ x: -20, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ delay: 0.1, duration: 0.5 }}
+              className="font-extrabold text-2xl tracking-tight text-[var(--color-text-main)] transition-colors"
+            >
+              GCEE
+            </motion.span>
           </Link>
 
           {/* Desktop Menu */}

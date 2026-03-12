@@ -13,23 +13,37 @@
 }
 
 :root {
-  --color-primary: #4f46e5;      /* Indigo 600 */
-  --color-secondary: #0ea5e9;    /* Sky 500 */
-  --color-background: #f8fafc;   /* Slate 50 */
-  --color-surface: #ffffff;      /* White */
-  --color-text-main: #0f172a;    /* Slate 900 */
-  --color-text-muted: #64748b;   /* Slate 500 */
-  --color-border: #e2e8f0;       /* Slate 200 */
+  --color-primary: #4f46e5;
+  /* Indigo 600 */
+  --color-secondary: #0ea5e9;
+  /* Sky 500 */
+  --color-background: #f8fafc;
+  /* Slate 50 */
+  --color-surface: #ffffff;
+  /* White */
+  --color-text-main: #0f172a;
+  /* Slate 900 */
+  --color-text-muted: #64748b;
+  /* Slate 500 */
+  --color-border: #e2e8f0;
+  /* Slate 200 */
 }
 
 .dark {
-  --color-primary: #6366f1;      /* Indigo 500 */
-  --color-secondary: #38bdf8;    /* Sky 400 */
-  --color-background: #020617;   /* Slate 950 */
-  --color-surface: #0f172a;      /* Slate 900 */
-  --color-text-main: #f8fafc;    /* Slate 50 */
-  --color-text-muted: #94a3b8;   /* Slate 400 */
-  --color-border: #1e293b;       /* Slate 800 */
+  --color-primary: #6366f1;
+  /* Indigo 500 */
+  --color-secondary: #38bdf8;
+  /* Sky 400 */
+  --color-background: #020617;
+  /* Slate 950 */
+  --color-surface: #0f172a;
+  /* Slate 900 */
+  --color-text-main: #f8fafc;
+  /* Slate 50 */
+  --color-text-muted: #94a3b8;
+  /* Slate 400 */
+  --color-border: #1e293b;
+  /* Slate 800 */
 }
 
 body {
@@ -41,7 +55,12 @@ body {
 }
 
 /* Base headings */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   color: var(--color-text-main);
 }
 
@@ -50,6 +69,31 @@ h1, h2, h3, h4, h5, h6 {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+/* Fix for visibility on dark-background banners (Hero/Department/Footer) */
+.bg-\[\#020617\] h1,
+.bg-\[\#020617\] h2,
+.bg-\[\#020617\] p,
+.bg-\[\#020617\] span,
+.bg-\[\#020617\] a {
+  color: #ffffff !important;
+}
+
+/* Directional Theme Animation Logic */
+.theme-toggling {
+  transition: none !important;
+  animation: theme-grow-tr 0.8s ease-in-out forwards;
+}
+
+@keyframes theme-grow-tr {
+  from {
+    clip-path: circle(0% at 100% 0%);
+  }
+
+  to {
+    clip-path: circle(150% at 100% 0%);
+  }
 }
 
 /* Fix for animation layer */

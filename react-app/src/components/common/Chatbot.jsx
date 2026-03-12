@@ -1,7 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaCommentDots, FaTimes, FaPaperPlane } from 'react-icons/fa';
-
 const FAQ_DATA = {
   'admissions': 'TNEA 2026 Admissions are open. Please visit the Admissions page or contact the Directorate of Technical Education.',
   'departments': 'We offer B.E/B.Tech in CSE, ECE, EEE, Mechanical, Civil, IT, and AI&DS, as well as M.E in Structural and CSE.',
@@ -15,6 +14,27 @@ const Chatbot = () => {
     { type: 'bot', text: 'Hi! I am the GCEE Chatbot. How can I help you today? Choose a topic below:' }
   ]);
   const [inputVal, setInputVal] = useState('');
+  const chatWindowRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        chatWindowRef.current && 
+        !chatWindowRef.current.contains(event.target) &&
+        !event.target.closest('#chatbot-toggle')
+      ) {
+        setIsOpen(false);
+      }
+    };
+    
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isOpen]);
+
 
   const handleOptionClick = (option) => {
     setMessages(prev => [...prev, { type: 'user', text: option }]);
@@ -38,6 +58,7 @@ const Chatbot = () => {
     <>
       {/* Chat button */}
       <motion.button
+        id="chatbot-toggle"
         className="fixed bottom-6 right-6 z-[9999] w-14 h-14 bg-[var(--color-primary)] text-white rounded-full flex items-center justify-center shadow-[0_0_20px_var(--color-primary)] hover:bg-[var(--color-secondary)] hover:shadow-[0_0_30px_var(--color-secondary)] transition-colors duration-300"
         onClick={() => setIsOpen(!isOpen)}
         whileHover={{ scale: 1.15, rotate: 10 }}
@@ -53,6 +74,7 @@ const Chatbot = () => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
+            ref={chatWindowRef}
             initial={{ opacity: 0, y: 50, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 50, scale: 0.9 }}

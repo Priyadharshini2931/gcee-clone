@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaGlobe, FaTwitter, FaFacebookF, FaLinkedinIn } from 'react-icons/fa';
-
+import { motion } from 'framer-motion';
+import logo from '../../assets/images/logo.png';
 const Footer = () => {
   return (
     <footer className="bg-[var(--color-surface)] text-[var(--color-text-muted)] pt-16 pb-0 mt-0 border-t border-[var(--color-border)] shadow-[0_-10px_40px_rgba(0,0,0,0.05)] transition-colors duration-300">
@@ -8,10 +9,17 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
 
           {/* About Section */}
-          <div className="space-y-6">
-            <h3 className="text-2xl font-bold text-[var(--color-text-main)] mb-6 relative inline-block">
-              GCE ERODE
-              <span className="absolute -bottom-2 left-0 w-1/2 h-1 bg-[var(--color-primary)] rounded-full"></span>
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="space-y-6"
+          >
+            <h3 className="text-2xl font-bold text-[var(--color-text-main)] mb-6 relative inline-flex items-center gap-3">
+              <img src={logo} alt="GCEE Logo" className="w-12 h-12 drop-shadow-md" />
+              GCEE
+              <span className="absolute -bottom-2 left-0 w-1/2 h-1 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] rounded-full"></span>
             </h3>
             <p className="text-sm leading-relaxed">
               Government College of Engineering, Erode, formerly IRTT, is a premier educational institution established in 1984 under the auspices of the Institute of Road Transport, Government of Tamil Nadu.
@@ -27,13 +35,19 @@ const Footer = () => {
                 <FaLinkedinIn size={16} />
               </a>
             </div>
-          </div>
+          </motion.div>
 
           {/* Quick Links */}
-          <div className="lg:pl-8">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="lg:pl-8"
+          >
             <h3 className="text-xl font-bold text-[var(--color-text-main)] mb-6 relative inline-block">
               Quick Links
-              <span className="absolute -bottom-2 left-0 w-1/2 h-1 bg-[var(--color-primary)] rounded-full"></span>
+              <span className="absolute -bottom-2 left-0 w-1/2 h-1 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] rounded-full"></span>
             </h3>
             <ul className="space-y-4">
               {[
@@ -54,13 +68,18 @@ const Footer = () => {
                 </li>
               ))}
             </ul>
-          </div>
+          </motion.div>
 
           {/* Useful Links */}
-          <div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
             <h3 className="text-xl font-bold text-[var(--color-text-main)] mb-6 relative inline-block">
               Important Links
-              <span className="absolute -bottom-2 left-0 w-1/2 h-1 bg-[var(--color-primary)] rounded-full"></span>
+              <span className="absolute -bottom-2 left-0 w-1/2 h-1 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] rounded-full"></span>
             </h3>
             <ul className="space-y-4">
               {[
@@ -93,13 +112,18 @@ const Footer = () => {
                 </li>
               ))}
             </ul>
-          </div>
+          </motion.div>
 
           {/* Contact Info */}
-          <div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+          >
             <h3 className="text-xl font-bold text-[var(--color-text-main)] mb-6 relative inline-block">
               Contact Us
-              <span className="absolute -bottom-2 left-0 w-1/2 h-1 bg-[var(--color-primary)] rounded-full"></span>
+              <span className="absolute -bottom-2 left-0 w-1/2 h-1 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] rounded-full"></span>
             </h3>
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
@@ -127,7 +151,7 @@ const Footer = () => {
                 </a>
               </li>
             </ul>
-          </div>
+          </motion.div>
         </div>
       </div>
 
