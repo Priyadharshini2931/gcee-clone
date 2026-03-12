@@ -14,7 +14,25 @@ const Chatbot = () => {
     { type: 'bot', text: 'Hi! I am the GCEE Chatbot. How can I help you today? Choose a topic below:' }
   ]);
   const [inputVal, setInputVal] = useState('');
+  const [showTooltip, setShowTooltip] = useState(false);
   const chatWindowRef = useRef(null);
+
+  useEffect(() => {
+    // Show tooltip after a slight delay to grab attention
+    const timer = setTimeout(() => {
+      setShowTooltip(true);
+    }, 2000);
+    
+    // Hide it automatically after 8 seconds
+    const hideTimer = setTimeout(() => {
+      setShowTooltip(false);
+    }, 10000);
+
+    return () => {
+      clearTimeout(timer);
+      clearTimeout(hideTimer);
+    };
+  }, []);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -56,11 +74,41 @@ const Chatbot = () => {
 
   return (
     <>
+      {/* Attention Tooltip */}
+      <AnimatePresence>
+        {showTooltip && !isOpen && (
+          <motion.div
+            initial={{ opacity: 0, x: 20, scale: 0.8 }}
+            animate={{ opacity: 1, x: 0, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8, transition: { duration: 0.2 } }}
+            className="fixed bottom-10 right-24 z-[9998] bg-[var(--color-surface)] border border-[var(--color-border)] shadow-xl rounded-2xl p-3 pr-8 w-48 shadow-[0_10px_25px_rgba(0,0,0,0.1)]"
+          >
+            <button 
+              onClick={(e) => { e.stopPropagation(); setShowTooltip(false); }} 
+              className="absolute top-2 right-2 text-[var(--color-text-muted)] hover:text-[var(--color-text-main)] transition-colors"
+            >
+              <FaTimes size={12} />
+            </button>
+            <div className="flex items-start gap-3 cursor-pointer" onClick={() => { setIsOpen(true); setShowTooltip(false); }}>
+              <div className="w-8 h-8 rounded-full bg-[var(--color-primary)]/10 flex items-center justify-center flex-shrink-0 mt-1">
+                <span className="text-[10px] font-bold text-[var(--color-primary)]">BOT</span>
+              </div>
+              <div>
+                <p className="text-xs font-bold text-[var(--color-text-main)] mb-1">Hi there! 👋</p>
+                <p className="text-[10px] text-[var(--color-text-muted)] leading-tight">Need help navigating? I'm here to assist you.</p>
+              </div>
+            </div>
+            {/* Tooltip Arrow */}
+            <div className="absolute top-1/2 -right-2 -translate-y-1/2 w-4 h-4 bg-[var(--color-surface)] border-r border-b border-[var(--color-border)] transform -rotate-45"></div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Chat button */}
       <motion.button
         id="chatbot-toggle"
         className="fixed bottom-6 right-6 z-[9999] w-14 h-14 bg-[var(--color-primary)] text-white rounded-full flex items-center justify-center shadow-[0_0_20px_var(--color-primary)] hover:bg-[var(--color-secondary)] hover:shadow-[0_0_30px_var(--color-secondary)] transition-colors duration-300"
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => { setIsOpen(!isOpen); setShowTooltip(false); }}
         whileHover={{ scale: 1.15, rotate: 10 }}
         whileTap={{ scale: 0.9 }}
         animate={{ y: [0, -8, 0] }}
