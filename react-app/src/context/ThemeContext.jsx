@@ -22,7 +22,17 @@ export const ThemeProvider = ({ children }) => {
   }, [theme]);
 
   const toggleTheme = () => {
+    const root = window.document.documentElement;
+
+    // Add class to trigger the directional animation defined in index.css
+    root.classList.add('theme-toggling');
+
     setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light');
+
+    // Remove the class after the animation completes (800ms matches the CSS duration)
+    setTimeout(() => {
+      root.classList.remove('theme-toggling');
+    }, 800);
   };
 
   return (
