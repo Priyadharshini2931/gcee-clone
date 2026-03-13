@@ -8,6 +8,7 @@ import Library from './pages/Library';
 import Placement from './pages/Placement';
 import CampusLife from './pages/CampusLife';
 import { ThemeProvider } from './context/ThemeContext';
+import CustomCursor from './components/common/CustomCursor';
 
 // Simple placeholder page for routes under construction
 const PagePlaceholder = ({ title }) => (
@@ -22,6 +23,7 @@ const PagePlaceholder = ({ title }) => (
 function App() {
   return (
     <ThemeProvider>
+      <CustomCursor />
       <Router>
         <Routes>
           <Route element={<MainLayout />}>

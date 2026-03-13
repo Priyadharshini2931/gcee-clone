@@ -96,7 +96,6 @@ h6 {
   }
 }
 
-/* Fix for animation layer */
 .theme-transition-layer {
   position: fixed;
   top: 0;
@@ -105,4 +104,41 @@ h6 {
   height: 100vh;
   z-index: 9999;
   pointer-events: none;
+}
+
+/* 
+ * 🍎 MacOS Global Hover & Cursor Styles
+ */
+
+@media (pointer: fine) {
+  /* Hide native cursor primarily on big screens */
+  body, a, button, input, select, textarea, [role="button"], .interactive-card {
+    cursor: none !important;
+  }
+}
+
+/* Universal Smooth Scaling for Clickable Items */
+a, button, [role="button"], .interactive-card {
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+              box-shadow 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+              background-color 0.2s ease-in-out,
+              color 0.2s ease-in-out !important;
+  will-change: transform;
+}
+
+/* Subtle magnetic scale-up on hover */
+a:hover:not(.no-scale):not(.theme-toggle), 
+button:hover:not(.no-scale):not(.theme-toggle),
+[role="button"]:hover:not(.no-scale),
+.interactive-card:hover {
+  transform: translateY(-2px) scale(1.02);
+}
+
+/* Scale down on active/click */
+a:active:not(.no-scale), 
+button:active:not(.no-scale),
+[role="button"]:active,
+.interactive-card:active {
+  transform: translateY(0px) scale(0.96);
+  transition: transform 0.1s cubic-bezier(0.25, 1, 0.5, 1) !important;
 }
